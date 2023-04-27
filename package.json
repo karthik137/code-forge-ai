@@ -1,0 +1,22 @@
+{
+    "name": "codegenie-extension",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./src/extension.js",
+    "engines": {
+        "vscode": "^1.1.37"
+    },
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.generateCodeFromComment",
+                "title": "My Code Generator"
+            }
+        ]
+    },
+    "activationEvents": [
+        "onCommand:extension.generateCodeFromComment"
+    ],
+    "dependencies": {
+      "openai": "^3.2.1"    }
+}
