@@ -1,14 +1,14 @@
-# Codegenie
+# CodeForgeAI
 
-Codegenie is a VSCode extension project that takes natural language input and generates code as a response.
+CodeForgeAI is a VSCode extension project that takes natural language input and generates code as a response.
 
 ## Installation
 
-To install Codegenie, use the `vsce package` command.
+To install CodeForgeAI, use the `vsce package` command.
 
 ## Usage
 
-To use Codegenie, open the VSCode extension and enter your natural language input. Codegenie will generate the corresponding code as a response.
+To use CodeForgeAI, open the VSCode extension and enter your natural language input. CodeForgeAI will generate the corresponding code as a response.
 
 ## Contributing
 
