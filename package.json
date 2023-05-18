@@ -1,38 +1,49 @@
 {
-    "name": "CodeGenie",
-    "version": "1.2.7",
-    "description": "",
+    "name": "CodeForgeAI",
+    "version": "1.0.0",
+    "publisher": "karthik137",
+    "description": "CodeForgeAI is a VSCode extension project that takes natural language input and generates code as a response. ",
     "main": "./src/extension.js",
-	  "license": "gpl-3.0",
+    "scripts": {
+      "vscode:prepublish": "npm run esbuild-base -- --minify",
+      "esbuild-base": "esbuild ./src/extension.js --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+      "esbuild": "npm run esbuild-base -- --sourcemap",
+      "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
+  },
+    "license": "gpl-3.0",
     "engines": {
         "vscode": "^1.1.37"
     },
     "icon": "images/CodeGenieTextFrame.png",
     "galleryBanner": {
-      "color": "#EDEDFF"
+        "color": "#EDEDFF"
     },
-    "repository" : "https://github.com/karthik137/codegenie",
+    "repository": "https://github.com/karthik137/codegenie",
     "contributes": {
         "commands": [
             {
-                "command": "extension.CodeGenie",
-                "title": "CodeGenie"
+                "command": "extension.CodeForgeAI",
+                "title": "CodeForgeAI"
             }
         ],
         "configuration": {
-            "title": "CodeGenie",
+            "title": "CodeForgeAI",
             "properties": {
-              "CodeGenie.apiKey": {
-                "type": "string",
-                "default": "",
-                "description": "API key for your extension"
-              }
+                "CodeForgeAI.apiKey": {
+                    "type": "string",
+                    "default": "",
+                    "description": "API key for your extension"
+                }
             }
-          }
+        }
     },
     "activationEvents": [
-        "onCommand:extension.generateCodeFromComment"
+        "onCommand:extension.CodeForgeAI"
     ],
     "dependencies": {
-      "openai": "^3.2.1"    }
+        "openai": "^3.2.1"
+    },
+    "devDependencies": {
+        "esbuild": "^0.17.19"
+    }
 }

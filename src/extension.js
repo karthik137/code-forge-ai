@@ -8,14 +8,14 @@ async function generateCodeFromComment(comment) {
 
   // Show a loading message while the code is being generated
   const loadingMessage = vscode.window.setStatusBarMessage(
-    "Generating code...",
+    "Generating code ...",
     vscode.StatusBarAlignment.Left
   );
 
   const prompt = `Given the following comment:\n\n"${comment}"\n\nPlease generate the code that corresponds to this comment.`;
-  let configuration = workspace.getConfiguration("CodeGenie");
+  let configuration = workspace.getConfiguration("CodeForgeAI");
   let apiKey = configuration.get("apiKey");
-
+  
   const newConfig = {
     ...configuration,
     baseOptions: {
@@ -24,6 +24,8 @@ async function generateCodeFromComment(comment) {
       },
     },
   };
+
+  console.log("Printing new config " ,newConfig);
 
   const openai = new OpenAIApi(newConfig);
 
@@ -48,7 +50,7 @@ async function generateCodeFromComment(comment) {
 
 function activate(context) {
   let disposable = vscode.commands.registerCommand(
-    "extension.CodeGenie",
+    "extension.CodeForgeAI",
     async function () {
       const editor = vscode.window.activeTextEditor;
       const selection = editor.selection;
