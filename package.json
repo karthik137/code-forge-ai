@@ -14,11 +14,11 @@
     "engines": {
         "vscode": "^1.1.37"
     },
-    "icon": "images/CodeGenieTextFrame.png",
+    "icon": "images/CodeForgeAI.png",
     "galleryBanner": {
         "color": "#EDEDFF"
     },
-    "repository": "https://github.com/karthik137/codegenie",
+    "repository": "https://github.com/karthik137/code-forge-ai",
     "contributes": {
         "commands": [
             {
