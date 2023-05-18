@@ -15,6 +15,51 @@ CodeForgeAI is an advanced Visual Studio Code extension that empowers you to eff
 - API key configuration: Configure your OpenAI API key through Visual Studio Code's settings, ensuring seamless integration with the CodeForgeAI extension.
 
 
+## Building and Installing Locally (For Developers)
+
+1. Clone the CodeForgeAI repository from GitHub:
+
+    ```shell
+      git clone https://github.com/karthik137/code-forge-ai.git
+    ```
+
+2. Install the project dependencies by running the following command in the terminal:
+
+    ```shell
+
+    npm install
+
+    ```
+
+3. Build the extension by running the following command in the terminal:
+
+    ```shell
+
+    vsce package
+
+    ```
+
+4. This will generate a .vsix file in the root of the project.
+
+5. To install the extension locally, open Visual Studio Code and go to Extensions view (Ctrl+Shift+X).
+
+6. Click on the "..." (More Options) button and choose "Install from VSIX...".
+
+7. Select the .vsix file generated in the previous step.
+
+8. Visual Studio Code will install the extension and you can start using CodeForgeAI.
+
+
+## Configuring the API Key
+
+1. Open the Visual Studio Code settings by going to File > Preferences > Settings (or by using the keyboard shortcut Ctrl+,).
+
+2. Search for "CodeForgeAI" to find the extension-specific settings.
+
+3. Enter your OpenAI API key in the "CodeForgeAI: Api Key" setting. This will allow the extension to connect to the OpenAI service for code generation.
+
+4. Save the settings file.
+
 ## Getting Started
 
 
@@ -39,11 +84,11 @@ CodeForgeAI is an advanced Visual Studio Code extension that empowers you to eff
 
 To generate a simple JavaScript function that calculates the sum of two numbers, add a comment like this:
 
-```javascript
+  ```javascript
 
-// Generate a function to calculate the sum of two numbers
+  // Generate a function to calculate the sum of two numbers
 
-```
+  ```
 
 Trigger the code generation using one of the methods mentioned above, and CodeForgeAI will generate the following code snippet:
 
