@@ -1,16 +1,25 @@
 const vscode = require('vscode');
+const { workspace } = require('vscode');
 const openai = require('openai');
 const { Configuration, OpenAIApi } = require("openai");
-
-const configuration = new Configuration({
-  apiKey: "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",
-});
 
 async function generateCodeFromComment(comment) {
     // TODO: Implement code generation using ChatGPT
 
     const prompt = `Given the following comment:\n\n"${comment}"\n\nPlease generate the code that corresponds to this comment.`;
-    const openai = new OpenAIApi(configuration);
+    let configuration = workspace.getConfiguration('CodeGenie');
+    let apiKey = configuration.get('apiKey');
+
+    const newConfig = {
+      ...configuration,
+      baseOptions : {
+        headers : {
+          Authorization : `Bearer ${apiKey}`
+        }
+      }
+    }
+
+    const openai = new OpenAIApi(newConfig);
 
 
     const response = await openai.createCompletion({
@@ -20,30 +29,26 @@ async function generateCodeFromComment(comment) {
         temperature: 0,
       });
 
-    //console.log("Printing response ",response.data.choices[0].text.trim());
-    return response.data.choices[0].text.trim();
+    const generatedResponse = response.data.choices[0].text.trim();
+    const responseWithNewLine = `\n${generatedResponse}`;
+    return responseWithNewLine;
   
   }
 
-
-// vscode.commands.registerCommand('extension.generateCodeFromComment', async function () {
-//   const comment = await vscode.window.showInputBox({ prompt: 'Enter a comment to generate code' });
-//   const generatedCode = await generateCodeFromComment(comment);
-
-//   const editor = vscode.window.activeTextEditor;
-//   editor.edit((editBuilder) => {
-//     editBuilder.insert(editor.selection.active, generatedCode);
-//   });
-// });
-
 function activate(context) {
-  let disposable = vscode.commands.registerCommand('extension.generateCodeFromComment', async function () {
-    const comment = await vscode.window.showInputBox({ prompt: 'Enter a comment to generate code' });
-    const generatedCode = await generateCodeFromComment(comment);
+  let disposable = vscode.commands.registerCommand('extension.CodeGenie', async function () {
     const editor = vscode.window.activeTextEditor;
-    editor.edit((editBuilder) => {
-      editBuilder.insert(editor.selection.active, generatedCode);
-    });
+    const selection = editor.selection;
+    const comment = editor.document.getText(selection);
+
+    if (comment.trim().length > 0) {
+      const code = await generateCodeFromComment(comment);
+      editor.edit(editBuilder => {
+        editBuilder.insert(selection.end, '\n' + code);
+      });
+    } else {
+      vscode.window.showErrorMessage('No comment selected.');
+    }
   });
 
   context.subscriptions.push(disposable);
